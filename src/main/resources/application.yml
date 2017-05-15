@@ -1,0 +1,56 @@
+#配置服务器(仅使用内置服务器时生效)
+server:
+  port: 8080
+
+#Spring配置
+spring:
+  #SpringMvc配置
+  mvc:
+    #视图管理配置
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+
+  #数据库配置
+  datasource:
+    #使用Hikari连接池
+    type: com.zaxxer.hikari.HikariDataSource
+    #驱动设置
+    driver-class-name: com.mysql.jdbc.Driver
+    #数据库链接设置
+    url: jdbc:mysql://114.215.136.14:3306/TestDB?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    #用户名
+    username: TestUser
+    #密码
+    password: TestUser
+  #JPA配置
+  jpa:
+    #JPA配置
+    properties:
+      hibernate:
+        #数据库方言
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    #hibernate配置
+    hibernate:
+      #数据库连接模式
+      ddl-auto: update
+      #配置的物理命名策略(使用默认的出问题，待研究)
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    #控制台输出数据库语言,方便调试
+    show-sql: true
+
+mybatis:
+  configuration:
+  #配置日志托管
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+#日志配置
+logging:
+  level:
+    #输出Dao层日志(显示数据库连接,显示sql语句等)
+    com.qingyi.SBJM.Dao: debug
+
+#自定义参数
+myname: Hello Spring Boot!
+

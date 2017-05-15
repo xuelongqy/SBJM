@@ -1,0 +1,66 @@
+buildscript {
+	ext {
+		//SpringBoot版本
+		springBootVersion = '1.5.2.RELEASE'
+	}
+	repositories {
+		maven {
+			url 'http://maven.aliyun.com/nexus/content/groups/public/'
+		}
+		jcenter()
+        mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+
+war {
+	baseName = 'sbjm'
+	version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+	maven {
+		url 'http://maven.aliyun.com/nexus/content/groups/public/'
+	}
+	jcenter()
+    mavenCentral()
+}
+
+configurations {
+	providedRuntime
+}
+
+//依赖管理
+dependencies {
+	//Spring Web应用框架
+    compile('org.springframework.boot:spring-boot-starter-web')
+	//添加Tomcat启动方式
+	compile("org.springframework.boot:spring-boot-starter-tomcat")
+	//添加jsp视图支持
+	runtime("org.apache.tomcat.embed:tomcat-embed-jasper")
+
+	//Spring Jdbc
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+
+	//Spring Data JPA
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	//SpringBoot Mybatis
+	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.2.0')
+	//Hikari连接池
+	compile group: 'com.zaxxer', name: 'HikariCP'
+	//Mysql驱动
+	runtime('mysql:mysql-connector-java')
+
+	//测试单元
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
